@@ -1,0 +1,128 @@
+$first-color: #dbd8e3; 
+$second-color:#5c5470; 
+$third-color:#352f44; 
+$fourth-color: #2a2438; 
+
+$primary-text-color: #212121;
+$secondary-text-color: #757575; 
+$third-text-color: #ccc;
+
+$divider-color:#BDBDBD;
+$icon-color: #000000; 
+
+
+body {
+    margin: 0;
+    font-size: 14px;
+    display: flex;
+    min-height: 100vh;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: $third-text-color;
+}
+
+aside {
+    width: 250px;
+    min-width: 250px;
+    display: flex;
+    flex-direction: column;
+    background: $second-color;
+    color: $third-text-color;
+
+    & .abstraction {
+        margin: 0 10px;
+        padding-bottom: 40px;
+    }
+    & nav {
+        & ul {
+            & li {
+                margin: 5px 10px;
+                &:first-child {
+                    font-weight: bold;
+                }
+            }
+        }
+    }  
+    & .aside-footer {
+        height: 250px;
+        margin-top: auto;
+        margin-bottom: auto;
+        padding: 5px 10px;
+        & p {
+            font-weight: bold;
+        }
+    }
+}
+
+main {
+    flex: 1;
+    background-color: $first-color;
+    color: $primary-text-color;
+    padding-top: 25px;
+}
+
+.article-list {
+    padding: 0 0.5em;
+    margin: 0 0 0 30px;
+
+    & .title {
+        color: $primary-text-color;
+        font-weight: bold;
+        padding-bottom: 10px;
+    }
+    
+    & li {
+        position: relative;
+        padding: 0.1em 0.3em 1em 1.3em;
+        display: flex;
+        align-items: center;
+        &::before {
+            position: absolute;
+            top: 0.5em;
+            left: 0;
+            display: block;
+            width: 6px;
+            height: 6px;
+            content: '';
+            border-right: 3px solid $second-color;
+            border-bottom: 3px solid $second-color;
+            transform: rotate(-45deg);
+        }   
+        & a {
+            color: $primary-text-color;
+        }
+        & form {
+            width: 20%;
+            & input[type="text"] {
+                width: 60%;   
+                margin-left: 10px;
+            }
+            & input[type="submit"] {
+                box-sizing: border-box;
+                display: inline-block;
+                padding: 0.15em 0.8em;
+                font-size: 0.8em;
+                color: $second-color;
+                text-decoration: none;
+                user-select: none;
+                border: 1px $second-color solid;
+                border-radius: 3px;
+                transition: 0.4s ease;
+                cursor: pointer;
+                &:hover {
+                    color: $third-text-color;
+                    background: $second-color;
+                    opacity: 0.4;
+                }
+            }
+        }
+    }
+}
