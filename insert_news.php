@@ -1,8 +1,18 @@
 <?php 
+  session_start();
+
   // POSTデータ取得
   $title = $_POST['title'];
   $content = $_POST['content'];
   $tag = $_POST['tag'];
+
+  if (
+    empty($_POST['token'])
+    || empty($_SESSION['token'])
+    || $_POST['token'] !== $_SESSION['token']
+  ) {
+      throw new Exception('トークンミスマッチ');
+  }
 
   require_once 'funcs.php';
   $pdo = db_conn();

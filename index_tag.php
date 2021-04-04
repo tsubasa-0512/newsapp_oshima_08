@@ -1,4 +1,9 @@
 <?php 
+  session_start();
+
+  $token = bin2hex(openssl_random_pseudo_bytes(16));
+  $_SESSION['token'] = $token;
+
   require_once 'funcs.php';
   $pdo = db_conn();
 
@@ -32,12 +37,16 @@
     while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
       $view .= '<li>
                   <a href='.$result['content'].'>'.$result['title'].'</a>
+                  <form method="POST" action="update_tag.php?id='.$result['id'].'" style="width:15%;">
+                    <input type="hidden" name="token" value="'.$token.'"/>
+                    <input type="text" name="tag" value="'.$result['tag'].'"/>
+                    <input type="submit" value="変更">
+                  </form>
                   <a href="delete.php?id=' . $result['id'] . '"
                   style="
                   box-sizing: border-box;
                   display: inline-block;
                   padding: 0.2em 1em;
-                  margin-left: 10px;
                   font-size: 0.8em;
                   color: #ccc;
                   text-decoration: none;

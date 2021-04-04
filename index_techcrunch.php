@@ -1,4 +1,6 @@
 <?php 
+  session_start();
+  
   require_once 'simple_html_dom.php';
   require_once 'funcs.php';
 
@@ -50,10 +52,13 @@
 
   // 記事一覧表示関数
   function makeArticle($article_array, $title_array, $url_array) {
+    $token = bin2hex(openssl_random_pseudo_bytes(16));
+    $_SESSION['token'] = $token;
     for($i=0; $i<count($article_array); ++$i){
       echo '<li>
               '.$article_array[$i].'
               <form method="POST" action="insert_news.php">
+                <input type="hidden" name="token" value="'.$token.'"/>
                 <input type="hidden" name="title" value="'.$title_array[$i].'"/>
                 <input type="hidden" name="content" value="'.$url_array[$i].'"/>
                 <input type="text" name="tag" placeholder="タグ"/>
@@ -77,12 +82,12 @@
 <body>
   <aside>
     <?php require_once 'news_title.php'; ?>
-    <div class="aside-footer">
+    <di v class="aside-footer">
       <p>タグ</p>
       <div class="search-tag">
         <?php echo $tag; ?>
       </div>
-    </div>
+    </di>
   </aside>
   <main>
     <ul class="article-list">

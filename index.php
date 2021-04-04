@@ -1,4 +1,8 @@
 <?php
+session_start();
+
+$token = bin2hex(openssl_random_pseudo_bytes(16));
+$_SESSION['token'] = $token;
 
 require_once 'funcs.php';
 $pdo = db_conn();
@@ -32,7 +36,8 @@ if ($status == false) {
     $article =  '<a href="'.$result['content'].'"  target="_blank" rel="noopener noreferrer">'.$result['title'].'</a>';
     $view .= '<li>
               '.$article.'
-                <form method="POST" action="update_tag.php?id='.$result['id'].'">
+                <form method="POST" action="update_tag.php?id='.$result['id'].'" style="width:15%;">
+                  <input type="hidden" name="token" value="'.$token.'"/>
                   <input type="text" name="tag" value="'.$result['tag'].'"/>
                   <input type="submit" value="変更">
                 </form>
