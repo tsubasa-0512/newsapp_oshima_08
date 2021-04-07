@@ -24,4 +24,9 @@
         header("Location: ".$file_name);
         exit();
     }
+
+// エスケープ命令
+    function h($str){
+        return htmlspecialchars($str, ENT_QUOTES);
+    }
 ?>

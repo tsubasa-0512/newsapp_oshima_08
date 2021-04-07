@@ -1,8 +1,12 @@
 <?php
   session_start();
 
+  require_once 'funcs.php'; 
+  
   $id = $_GET['id'];
   $tag = $_POST["tag"];
+
+  $tag = h($tag);
 
   if (
     empty($_POST['token'])
@@ -12,7 +16,6 @@
       throw new Exception('トークンミスマッチ');
   }
 
-  require_once 'funcs.php'; 
   $pdo = db_conn();
   $stmt = $pdo->prepare("UPDATE news SET tag = :tag WHERE id = :id");
 

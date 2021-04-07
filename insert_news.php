@@ -1,10 +1,16 @@
 <?php 
   session_start();
+  
+  require_once 'funcs.php';
 
   // POSTデータ取得
   $title = $_POST['title'];
   $content = $_POST['content'];
   $tag = $_POST['tag'];
+
+  $title = h($title);
+  $content = h($content);
+  $tag = h($tag);
 
   if (
     empty($_POST['token'])
@@ -14,7 +20,6 @@
       throw new Exception('トークンミスマッチ');
   }
 
-  require_once 'funcs.php';
   $pdo = db_conn();
 
   $stmt = $pdo->prepare("INSERT INTO news(title,content,tag)VALUES(:title,:content,:tag)");
